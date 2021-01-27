@@ -6,26 +6,70 @@ namespace Interfaces
     {
         static void Main(string[] args)
         {
-            PersonManager manager = new PersonManager();
-            Customer customer = new Customer
-            { 
-                Id = 1, 
-                FirstName = "Engin", 
-                LastName = "Demiroğ", 
-                Address = "Ankara" 
+            //PersonManager manager = new PersonManager();
+            //Customer customer = new Customer
+            //{ 
+            //    Id = 1, 
+            //    FirstName = "Engin", 
+            //    LastName = "Demiroğ", 
+            //    Address = "Ankara" 
+            //};
+
+            //Student student = new Student
+            //{
+            //    Id = 1,
+            //    FirstName = "Derin",
+            //    LastName = "Demiroğ",
+            //    Department = "Computer Sciences"
+            //};
+            //manager.Add(customer);
+            //manager.Add(student);
+
+            //CustomerManager customerManager = new CustomerManager();
+            //customerManager.Add(new OracleCustomerDal());
+
+            ICustomerDal[] customerDals = new ICustomerDal[3]
+            {
+                new SqlServerCustomerDal(),
+                new OracleCustomerDal(),
+                new MySqlCustomerDal(),
             };
 
-            Student student = new Student
+            foreach (var customerDal in customerDals)
             {
-                Id = 1,
-                FirstName = "Derin",
-                LastName = "Demiroğ",
-                Department = "Computer Sciences"
-            };
-            manager.Add(customer);
-            manager.Add(student);
+                customerDal.Add();
+            }
+
             Console.ReadLine();
         }
+
+        //private static void Demo()
+        //{
+        //    CustomerManager customerManager = new CustomerManager();
+        //    customerManager.Add(new OracleCustomerDal());
+        //}
+
+        //private static void InterfacesIntro()
+        //{
+        //PersonManager manager = new PersonManager();
+        //Customer customer = new Customer
+        //{ 
+        //    Id = 1, 
+        //    FirstName = "Engin", 
+        //    LastName = "Demiroğ", 
+        //    Address = "Ankara" 
+        //};
+
+        //Student student = new Student
+        //{
+        //    Id = 1,
+        //    FirstName = "Derin",
+        //    LastName = "Demiroğ",
+        //    Department = "Computer Sciences"
+        //};
+        //manager.Add(customer);
+        //manager.Add(student);
+        //}
     }
 
     interface IPerson
